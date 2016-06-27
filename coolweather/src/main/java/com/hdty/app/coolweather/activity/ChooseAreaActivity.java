@@ -1,4 +1,4 @@
-﻿package com.hdty.app.coolweather.activity;
+package com.hdty.app.coolweather.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -134,11 +134,12 @@ public class ChooseAreaActivity extends Activity {
         if (provinceList.size() > 0) {
             dataList.clear();
             for (Province province : provinceList) {
-                adapter.notifyDataSetChanged();
-                listView.setSelection(0);
-                title_text.setText("中国");
-                currentLevel = LEVEL_PROVINCE;
+               dataList.add(province.getProvinceName());
             }
+            adapter.notifyDataSetChanged();
+            listView.setSelection(0);
+            title_text.setText("中国");
+            currentLevel = LEVEL_PROVINCE;
         } else {
             queryFromServer(null, "province");
         }
@@ -184,7 +185,6 @@ public class ChooseAreaActivity extends Activity {
 
     /**
      * 根据传入的代号和类型从服务器上查询省市县数据。
-     *
      * @param code
      * @param type
      */
@@ -234,9 +234,7 @@ public class ChooseAreaActivity extends Activity {
                         Toast.makeText(ChooseAreaActivity.this, "加载失败", Toast.LENGTH_LONG).show();
                     }
                 });
-            }
-
-            ;
+            };
         });
     }
 
@@ -274,8 +272,8 @@ public class ChooseAreaActivity extends Activity {
             if (isFromWeatherActivity) {
                 Intent intent = new Intent(this, WeatherActivity.class);
                 startActivity(intent);
+                finish();
             }
-            finish();
         }
     }
 }
