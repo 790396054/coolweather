@@ -88,6 +88,7 @@ public class Utility {
                     county.setCityId(cityId);
                     county.setCountyCode(array[0]);
                     county.setCountyName(array[1]);
+                    // 将解析出来的数据存储到County表
                     db.saveCounty(county);
                 }
                 return true;
@@ -129,7 +130,6 @@ public class Utility {
      */
     public static void saveWeatherInfo(Context context,String cityName,String weatherCode,String temp1,String temp2,
                               String weatherDesp, String publishTime){
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年M月d日", Locale.CHINA);
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         editor.putBoolean("city_selected", true);
@@ -142,6 +142,4 @@ public class Utility {
         editor.putString("current_date", sdf.format(new Date()));
         editor.commit();
     }
-
-
 }
